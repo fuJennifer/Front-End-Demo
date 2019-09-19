@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Bike Rental</title>
+        <script type="text/javascript" src="data.txt"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script>
+          $(function(){
+             var myData=data;
+             var length=Object.keys(myData.products).length;
+             for(var i=0;i<length;i++)
+             {
+               
+              var divId='div'+i;
+              var btnId=i;
+              
+              //add div and button in div,add eventListener
+              $('.row').prepend('<div id="'+divId+'" class="col-lg-4"></div>');
+              $('#'+divId+'').prepend('<button id="'+btnId+'" style="margin:auto;display:block;">Rental</button>');
+                (function(btnId){
+
+                var element=document.getElementById(btnId);
+                element.addEventListener("click",function(e){
+
+                var btnId=$(e.target).attr('id')
+                if(element.textContent=="Rental")
+                {
+                  alert("Rental Successfull!");
+                  element.textContent="Reserved";
+                }
+                else
+                {
+                  alert("It has been reserved!Please choose another one.")
+                }
+              });})(btnId); 
+               // add the bike detail 
+               $('#'+divId+'').prepend('<p>Price:'+myData.products[i].price+'$</p>');
+               $('#'+divId+'').prepend('<p>Name:'+myData.products[i].name+'</p>');
+               $('#'+divId+'').prepend('<p>Type:'+myData.products[i].product_type+'</p>');
+               var imglink=myData.products[i].image;
+               $('#'+divId+'').prepend('<img src="'+imglink+'"/>');
+               $('#'+divId+'').prepend('<br>');
+               }
+
+          });
+        </script>
+    </head>
+    <body>
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+ </body>
+</html>
